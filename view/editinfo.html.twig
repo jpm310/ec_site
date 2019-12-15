@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>登録情報変更画面</title>
+    </head>
+    <body>
+     <input type="hidden" name="entry_url" id="entry_url" value="{{constant('ec\\Bootstrap::ENTRY_URL')}}">
+        <form method="post" action="" enctype="multipart/form-data">
+        <table >
+         <input type="hidden" name="mem_id" value="{{memArr.mem_id}}">
+                <tr>
+                     <th>お名前(氏名)</th>
+                        <td> <input type="text" name="family_name" value="{{memArr.family_name}}">
+                        <input type="text" name="first_name" value="{{memArr.first_name}}"> </td>
+                  </tr>
+                  <tr>
+                      <th>ユーザーID</th> 
+                          <td> <input type="text" name="user_id" value="{{memArr.user_id}}"></td>
+                  </tr>
+                  <tr>
+                      <th>性別</th>
+                      <td>
+                          {% for index, label in sexArr %}
+                            <input type="radio" name="sex" value="{{index}}" id="sex_{{index}}" {% if memArr.sex == index %} checked="checked" 
+                            {% endif %}>
+                            <label for="sex_{{index}}">{{label}}</label>
+                            {% endfor %}
+                     </td>
+                  </tr>
+                  <tr>
+                      <th>生年月日</th>
+                    <td> <select name="year">
+                                {% for index, label in yearArr %}
+                                    <option value="{{index}}" {% if memArr.year == index %} selected
+                                    {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                            <select name='month'>
+                                {% for index, label in monthArr %}
+                                    <option value="{{index}}" {% if memArr.month == index %} selected
+                                    {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                            <select name='day'>
+                                {% for index, label in dayArr %}
+                                    <option value="{{index}}" {% if memArr.day == index %} selected
+                                    {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select></td>
+                  </tr>
+                  <tr>
+                      <th>郵便番号</th>
+                        <td><input type="text" name="zip1" value="{{memArr.zip1}}" id="zip1" size="3" maxlength="3"> -
+                        <input type="text" name="zip2" value="{{memArr.zip2}}" id="zip2" size="4" maxlength="4"></td>
+                  </tr>
+                  <tr>
+                      <th>住所</th>
+                      <td><input type="text" name="address" value="{{memArr.address}}" id="address" size="40"></td>
+                  </tr>
+                  <tr>
+                      <th>メールアドレス</th>
+                      <td><input type="text" name="email" value="{{memArr.email}}" size="40"></td>
+                  </tr>
+                  <tr>
+                      <th>電話番号</th>
+                      <td> <input type="text" name="tel1" value="{{memArr.tel1}}" size="6" maxlength="6"> - 
+                         <input type="text" name="tel2" value="{{memArr.tel2}}" size="6" maxlength="6"> - 
+                         <input type="text" name="tel3" value="{{memArr.tel3}}" size="6" maxlength="6"> </td>
+                  </tr>
+                  <tr>
+                      <th>プロフィール画像</th>
+                      <td><input type="file" name="picture"> <img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images_upload/{{memArr.picture}}" style="width:100px;height:100px;"  alt="プロフィール画像"/></td>
+                </tr>
+        </table>
+          <div>
+            <input type="submit" name="send" value="変更確定">
+           </div>
+        </form>
+        <div style="text-align: center"><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}mypage.php" class="badge badge-warning">マイページへ戻る</a></div>
+    </body>
+</html>

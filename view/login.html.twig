@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v3.8.6">
+        <script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{constant('member\\Bootstrap::APP_URL')}}js/common.js"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{{constant('member\\Bootstrap::APP_URL')}}css/ec.css" rel="stylesheet">
+        <title>ログイン</title>
+    </head>
+    <body class="text-center">
+        <div class="container mt-5">
+        <form class="form-signin" method="post" action=""> 
+        <h1 class="h3 mb-3 font-weight-normal">ログイン</h1>
+            <div class="form-group">
+                    <label for="exampleInputuserId1" class="sr-only">ユーザーID</label>
+                        <input class="col-xs-2"  type="text" class="form-control" name="user_id" id="exampleInputuserId1"  placeholder="ユーザーID" value="{{userIdArr}}"><br>
+                        {% if errArr == 'blank' %}<span class="red">{{emgArr.msg1}}</span><br>
+                        {% elseif errArr == 'failed' %}<span class="red">{{emgArr.msg2}}</span>{% endif %}
+
+                </div>
+                <div class="form-group">
+                        <label for="exampleInputPassword1" class="sr-only">パスワード</label>
+                        <input class="col-xs-2" type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="パスワード" value="">
+                </div>
+                <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="save" id="save" value="on"/>
+                        <label class="form-check-label" for="exampleCheck1">ログイン情報の保持</label>
+                </div>
+                <div>
+                    <input type="submit"  class="btn btn-warning" name="send" value="ログイン">
+                </div>
+            </form>
+            </div>
+        </body>
+</html>
+                           

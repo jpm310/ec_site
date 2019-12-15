@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>ご注文内容</title>
+    </head>
+    <body>
+    <h2>ご注文内容</h2>
+        {% if sumPrice != '' %}
+            <table>
+                <tr>
+                    <th>お名前</th>
+                    <td>{{memArr.family_name}} {{memArr.first_name}} 様</td>
+                </tr>
+                <tr>
+                    <th>ユーザーID</th>
+                    <td>{{memArr.user_id}}</td>
+                </tr>
+                <tr>
+                    <th>お届け先の住所</th>
+                     <td>〒{{memArr.zip1}} - {{memArr.zip2}} {{memArr.address}}</td>
+
+                </tr>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td>{{memArr.email}}</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>{{memArr.tel1}} - {{memArr.tel2}} - {{memArr.tel3}}</td>
+                </tr>
+                <tr>
+                    <th>合計金額</th>
+                    <td>&yen;{{sumPrice|number_format(0, '.', ',')}}</td>
+                </tr>
+                <tr>
+                    <th>〜内訳〜</th>
+                        <div class="item">
+                        <tr>
+                    {% for value in totalData %}
+                                <td class="image"><img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images/{{value.image}}" alt="{{value.item_name}}" width="193" height="130"></td>
+                                <td class="name">{{value.item_name}}</td>
+                                <tr>
+                                <th></th>
+                                <td class="price">&yen;{{value.price|number_format(0, '.', ',')}}(×{{value.num}})</td>
+                                <th>小計</th>
+                                <td class="total">&yen;{{value.total|number_format(0, '.', ',')}}</td>
+                         </tr>
+                        </div>
+                    {% endfor %}
+                </tr>
+            </table>
+            {% endif %}
+            <form method="post" action="">
+             {% if userId == '' %}<span class="text-danger">{{emgArr.msg1}}</span><br>
+                     {% endif %}
+             {% if sumPrice == '' %}<span class="text-danger">{{emgArr.msg2}}</span><br>
+                     {% endif %}
+                     {% if sumPrice != '' %}
+                    <input type="hidden" name="cmd" value="commit_order"/>
+                    <input type="submit" class="fix" value="注文確定"/>
+                    {% endif %}
+                    <div style="text-align: center"><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}cart.php" class="badge badge-primary">注文内容を変更する</a></div>
+                </div>
+        </form>
+      </body>
+    </html>
+
+
+                

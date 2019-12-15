@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>会員登録確認</title>
+    </head>
+    <body>
+        <form method="post" action="confirm.php">
+            <table>
+                <tr>
+                    <th>お名前(氏名)</th>
+                    <td>{{dataArr.family_name}} {{dataArr.first_name}}</td>
+                </tr>
+                <tr>
+                    <th>ユーザーID</th>
+                    <td>{{dataArr.user_id}}</td>
+                </tr>
+                <tr>
+                    <th>性別</th>
+                    <td>{% if dataArr.sex == '1' %}男性{% elseif dataArr.sex == '2' %}女性{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>生年月日</th>
+                    <td>{{dataArr.year}}年{{dataArr.month}}月{{dataArr.day}}日</td>
+                </tr>
+                <tr>
+                    <th>郵便番号</th>
+                    <td>{{dataArr.zip1}} - {{dataArr.zip2}}</td>
+                </tr>
+                <tr>
+                    <th>住所</th>
+                    <td>{{dataArr.address}}</td>
+                </tr>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td>{{dataArr.email}}</td>
+                </tr>
+                <tr>
+                    <th>パスワード</th>
+                    <td>【表示されません】</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>{{dataArr.tel1}} - {{dataArr.tel2}} - {{dataArr.tel3}}</td>
+                </tr>
+                <tr>
+                    <th>プロフィール画像</th>
+                    <td><img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images_upload/{{imageArr}}" style="width:100px;height:100px;"  alt="サムネイル画像"/></td>
+                </tr>
+            </table>
+            <div>
+                <input type="submit" name="back" value="戻る">
+                <input type="submit" name="complete" value="登録完了">
+                {% for key, value in dataArr %}
+                  <!-- ↓下記メソッドで配列か否かをチェックしている -->
+                {% if value is iterable %}
+                    {% for v in value %}
+                      <input type="hidden" name="{{key}}[]" value="{{v}}">
+                    {% endfor %}
+                {% else %}
+                    <input type="hidden" name="{{key}}" value="{{value}}">
+                {% endif %}
+            {% endfor %}
+          </div>
+        </form>
+      </body>
+    </html>
+
+
+                
