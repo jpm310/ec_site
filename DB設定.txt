@@ -1,0 +1,119 @@
+
+
+
+      CREATE DATABASE ec_site_db DEFAULT CHARACTER SET utf8;
+      GRANT ALL PRIVILEGES ON ec_site_db. * TO ec_site_user@'localhost'IDENTIFIED BY 'ec_site_pass' WITH GRANT OPTION;
+        USE ec_site_db;
+
+      //商品テーブル
+      CREATE TABLE item (
+        item_id int(10) unsigned not null auto_increment,
+        item_name varchar(100) not null,
+        detail text not null,
+        price DECIMAL(10.3) unsigned not null,
+        image varchar(50) not null,
+        ctg_id tinyint unsigned not null,
+        primary key( item_id ),
+        index item_idx( ctg_id )  
+        );
+
+        //カートの(取引)
+        CREATE TABLE cart (
+          crt_id int(10) unsigned not null auto_increment,
+          customer_no int(10) unsigned not null,
+          item_id int(10) unsigned not null,
+          num tinyint(1) unsigned not null default 1,
+          delete_flg tinyint(1) unsigned not null default 0,
+          primary key ( crt_id ),
+          index crt_idx( customer_no, delete_flg)
+        );
+
+        //カテゴリー
+        CREATE TABLE category (
+          ctg_id tinyint unsigned not null auto_increment,
+          category_name varchar(100) not null,
+          primary key(ctg_id)
+        );
+
+        //顧客の認識
+        CREATE TABLE session (
+          customer_no int(10) unsigned not null auto_increment,
+          session_key varchar(32),
+          primary key (customer_no)
+        );
+
+        //会員登録情報
+          CREATE TABLE member (
+          mem_id int(10) unsigned not null auto_increment,
+          user_id varchar(100) not null,
+          family_name varchar(20) not null,
+          first_name varchar(20) not null,
+          password varchar(100) not null,
+          sex tinyint(1) unsigned not null,
+          year varchar(4) not null,
+          month varchar(4) not null,
+          day varchar(2) not null,
+          zip1 varchar(3) not null,
+          zip2 varchar(4) not null,
+          address varchar(100) not null,
+          email varchar(255) not null,
+          tel1 varchar(6) not null,
+          tel2 varchar(6) not null,
+          tel3 varchar(6) not null,
+          picture varchar(255) not null,
+          regist_date datetime not null,
+          update_date datetime,
+          delete_date datetime,
+          delete_flg tinyint(1) unsigned not null default 0,
+          primary key ( mem_id )
+      );
+
+      // 郵便番号、住所テーブル
+      CREATE TABLE postcode_search (
+            jis varchar(5),
+            old_zip varchar(5),
+            zip varchar(7),
+            pref_kana varchar(100),
+            city_kana varchar(100),
+            town_kana varchar(100),
+            pref varchar(100),
+            city varchar(100),
+            town varchar(100),
+            comment1 tinyint(1) unsigned,
+            comment2 tinyint(1) unsigned,
+            comment3 tinyint(1) unsigned,
+            comment4 tinyint(1) unsigned,
+            comment5 tinyint(1) unsigned,
+            comment6 tinyint(1) unsigned
+        );
+    LOAD DATA INFILE '/Applications/MAMP/htdocs/DT/ec/KEN_ALL.CSV' INTO TABLE `postcode_search` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+
+       //商品レビューテーブル
+       CREATE TABLE reviews (
+        review_id int(10) unsigned not null auto_increment,
+        review_comment text not null,
+        review_date datetime not null,
+        review_item_id int(8) not null,
+        review_mem_id int(8) not null,
+        primary key ( review_id )
+      );
+
+      // 注文テーブル
+      CREATE TABLE order_details (
+        order_id int(10) unsigned not null auto_increment,
+        user_id varchar(100) not null,
+        sumPrice DECIMAL(10.3) unsigned not null, 
+        regist_date datetime not null,
+        primary key( order_id )
+        );
+
+
+      // 注文詳細テーブル
+      CREATE TABLE order_details (
+        order_detail_id int(10) unsigned not null auto_increment,
+        item_name varchar(100) not null,
+        price DECIMAL(10.3) unsigned not null, 
+        num tinyint(1) UNSIGNED not null,
+        detail_order_detail_id int(10) unsigned not null,
+        primary key( order_detail_id )
+        );

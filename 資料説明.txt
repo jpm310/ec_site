@@ -1,0 +1,74 @@
+// Controller(/Applications/MAMP/htdocs/DT/ec)
+Bootstrap.class.php       設定に関するプログラム
+list.php                  商品一覧を表示するプログラム
+detail.php                商品詳細に表示するプログラム
+cart.php                  カートを表示するプログラム
+regist.php                会員登録手続きを表示するプログラム
+postcode_search.php       郵便番号から住所を取得するためのプログラム
+confirm.php               会員登録時の確認画面を表示するプログラム
+complete.php              会員登録完了後にlist.phpへ遷移するためのプログラム
+login.php                 ログイン手続きを表示するプログラム
+logout.php                ログアウト手続きをするプログラム
+mypage.php                会員情報を表示するプログラム。会員情報編集と注文履歴の画面へのリンクを設置
+edit.info.php             会員情報編集画面を表示するプログラム
+check.myorder.php         注文履歴画面を表示するプログラム
+review.php                商品レビュー投稿画面を表示するプログラム
+search.php                商品検索結果を表示するプログラム
+order.confirm.php         注文内容確認画面を表示するプログラム
+order.complete.php        注文完了画面を表示するプログラム
+
+
+// Model(/Applications/MAMP/htdocs/DT/ec/model)
+PDODatabase.class.php     データベース関係のクラスファイル①
+Database.class.php        データベース関係のクラスファイル②(後に①と②は統合予定)
+Session.class.php         セッション関係のクラスファイル
+Cart.class.php            カートに関するプログラムのクラスファイル
+Item.class.php            商品に関するプログラムのクラスファイル
+Order.class.php           注文に関するプログラムのクラスファイル
+Common.class.php          会員登録時のエラーメッセージ作成クラスファイル
+
+initMaster.class.php      生年月日、性別を取得するクラスファイル(Applications/MAMP/htdocs/DT/ec/master)
+
+// View(/Applications/MAMP/htdocs/DT/templates/ec)
+list.html.twig            商品リストページ
+category_menu.html.twig   カテゴリリストの部分テンプレート
+detail.html.twig          商品詳細ページ
+cart.html.twig            カートページ
+regist.html.twig          会員登録ページ
+confirm.html.twig         会員登録確認ページ
+complete.html.twig        会員登録完了ページ
+login.html.twig           ログインページ
+mypage.html.twig          マイページ
+editinfo.html.twig        会員登録変更ページ
+check.myorder.html.twig   注文履歴ページ
+review.html.twig          商品レビュー投稿ページ
+search.html.twig          商品検索結果ページ
+order.confirm.html.twig   注文確認ページ
+order.complete.html.twig  注文完了ページ
+
+
+// Javascript(/Applications/MAMP/htdocs/DT/js)
+shopping.js               クリック先へ遷移するためのJavascriptページ
+
+
+// スタイルシート(/Applications/MAMP/htdocs/DT/css)
+ec.css              ecページ全体のcss
+
+
+// 商品画像格納フォルダ(/Applications/MAMP/htdocs/DT/ec/images)
+images
+
+
+// 会員プロフィール画像格納フォルダ(/Applications/MAMP/htdocs/DT/ec/images_upload)
+images_upload
+
+
+// ログのファイル(/Applications/MAMP/htdocs/DT/ec/logs)
+logs
+
+
+// 会員登録時に郵便番号から住所表示するための全国の住所の情報(/Applications/MAMP/htdocs/DT/ec)
+KEN_ALL.csv
+
+
+※データベース設計についてはDB設計.txt参照。また、DBの商品情報についてはinsert.txt参照。
