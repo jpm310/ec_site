@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{constant('ec\\Bootstrap::APP_URL')}}js/common.js"></script>
+        <link href="{{constant('ec\\Bootstrap::APP_URL')}}css/ec.css"
+rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>レビュー投稿</title>
+    </head>
+    <body>
+        <input type="hidden" name="entry_url" id="entry_url"
+value="{{constant('ec\\Bootstrap::ENTRY_URL')}}">
+        <form method="post" action="">
+            <table>
+                <tr>
+                    <th>ご投稿内容</th>
+                    <td>
+                     {% if review_comment == '' and errArr == 'blank' %}<span class="red">{{emgArr.msg2}}</span><br>
+                     {% endif %}
+                        <textarea name="review_comment" rows="10" cols="60"  placeholder="こちらにご記入下さいませ。">{{dataArr.review_comment}}</textarea>
+                    </td>
+              </tr>
+              <tr>
+                    <th></th>
+                    <td>
+                    {% if userId != '' %}{{userId}}様 いつもご利用ありがとうございます。</span><br>
+                     {% endif %}
+                    </td>
+                </tr>
+              <tr>
+                    <th></th>
+                    <td>
+                     <input type="hidden" name="review_item_id" value="{{dataArr.review_item_id}}">
+                     <input type="hidden" name="review_mem_id" value="{{dataArr.review_mem_id}}">
+                    </td>
+                </tr>
+                </table>
+                <div>
+                     {% if userId == '' and errArr == 'blank' %}<span class="red">{{emgArr.msg1}}</span><br>
+                     {% endif %}
+                    <input type="submit" name="send" value="投稿">
+                    <div style="text-align: center"><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php" class="badge badge-primary">一覧へ戻る</a></div>
+                </div>
+            </form>
+        </body>
+</html>
+                           

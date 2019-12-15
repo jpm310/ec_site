@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{constant('ec\\Bootstrap::APP_URL')}}js/shopping.js"></script>
+        <link href="{{constant('ec\\Bootstrap::APP_URL')}}css/ec.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>商品詳細</title>
+    </head>
+    <body>
+         {# ナビゲーション #}
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        {% if userId == '' %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}regist.php">会員登録する</a>
+        {% else %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}mypage.php">マイページ</a>
+        {% endif %}
+      </li>
+      <li class="nav-item">
+        {% if userId == '' %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}login.php">ログインする</a>
+        {% else %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}cart.php">カートを確認する</a>
+        {% endif %}
+    </ul>
+    {# 検索フォーム #}
+    <form class="form-inline my-2 my-lg-0" name="seek" action="search.php" method="post">
+      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="商品検索" aria-label="Search">
+      <input type="submit" name="search" value="検索">
+    </form>
+  </div>
+</nav>
+        <input type="hidden" name="entry_url" value="{{constant('ec\\Bootstrap::ENTRY_URL')}}" id="entry_url">
+        <div id="wrapper">
+            {% include 'category_menu.html.twig' %}
+            <div id="item_detail">
+                <div class="image">
+                    <img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images/{{itemData.image}}" alt="{{itemData.item_name}}" width="600" height="400">
+                </div>
+                <div class="detail">
+                    <dl>
+                        <dt>商品名</dt>
+                        <dd>{{itemData.item_name}}</dd>
+                        <dt>詳細</dt>
+                        <dd>{{itemData.detail}}</dd>
+                        <dt>価格</dt>
+                        <dd>&yen;{{itemData.price|number_format(0, '.', ',')}}</dd>
+                        <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
+                    </dl>
+                </div>
+                <div class="reviews">
+                </div>
+                 <div style="text-align: right"><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}review.php" class="badge badge-warning">レビューを投稿する</a></div>
+                    <dl> 
+                     {% for value in reviewArr if value.review_item_id == itemData.item_id %}
+                        <dt>商品レビュー({{value.user_id}}様より)</dt>
+                        <dd>{{value.review_comment}}</dd>
+                        {% endfor %}
+                     <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
+                    </dl>
+                    {% if userId != '' %}
+                    <div class="cart_in">
+                      <input type="button" name="cart_in" value="ショッピングカートへ入れる" id="cart_in">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

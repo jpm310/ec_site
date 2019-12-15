@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>マイページ</title>
+    </head>
+    <body>
+     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}cart.php">カートを確認する</a>
+    </ul>
+    {# 検索フォーム #}
+    <form class="form-inline my-2 my-lg-0" name="seek" action="search.php" method="post">
+      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="商品検索" aria-label="Search">
+      <input type="submit" name="search" value="検索">
+    </form>
+  </div>
+</nav>
+     <input type="hidden" name="entry_url" id="entry_url" value="{{constant('ec\\Bootstrap::ENTRY_URL')}}">
+        <table >
+                <tr>
+                     <th>お名前(氏名)</th>
+                        <td> {{memArr.family_name}}{{memArr.first_name}}</td>
+                  </tr>
+                  <tr>
+                      <th>ユーザーID</th> 
+                          <td>{{memArr.user_id}}</td>
+                  </tr>
+                  <tr>
+                      <th>性別</th>
+                          <td>{% if memArr.sex == '1' %}男性{% elseif memArr.sex == '2' %}女性{% endif %}</td>
+                  </tr>
+                  <tr>
+                      <th>生年月日</th>
+                    <td> {{memArr.year}}年{{memArr.month}}月{{memArr.day}}日</td>
+                  </tr>
+                  <tr>
+                      <th>郵便番号</th>
+                        <td>{{memArr.zip1}} - {{memArr.zip2}}</td>
+                  </tr>
+                  <tr>
+                      <th>住所</th>
+                      <td>{{memArr.address}}</td>
+                  </tr>
+                  <tr>
+                      <th>メールアドレス</th>
+                      <td>{{memArr.email}}</td>
+                  </tr>
+                  <tr>
+                      <th>パスワード</th>
+                      <td> 表示されません</td>
+                  </tr>
+                  <tr>
+                      <th>電話番号</th>
+                      <td>{{memArr.tel1}} - {{memArr.tel2}} - {{memArr.tel3}}</td>
+                  </tr>
+                  <tr>
+                      <th>プロフィール画像</th>
+                      <td><img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images_upload/{{memArr.picture}}" style="width:100px;height:100px;"  alt="プロフィール画像"/></td>
+                </tr>
+        </table>
+          <div style="text-align: left">
+            <a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}editinfo.php" class="badge badge-warning">会員情報を編集する</a>
+           </div>
+          <div style="text-align: left">
+            <a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}check.myorder.php" class="badge badge-warning">注文履歴</a>
+           </div>
+           <div style="text-align: left">
+           <a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php" class="badge badge-primary">一覧へ戻る</a></div>
+        </form>
+    </body>
+</html>

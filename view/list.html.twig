@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="{{constant('ec\\Bootstrap::APP_URL')}}css/ec.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <title>宅配カレー.com</title>
+    </head>
+    <body>
+    {# ナビゲーション #}
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        {% if userId == '' %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}regist.php">会員登録する</a>
+        {% else %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}mypage.php">マイページ</a>
+        {% endif %}
+      </li>
+      <li class="nav-item">
+        {% if userId == '' %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}login.php">ログインする</a>
+        {% else %}
+        <a class="nav-link" href="{{constant('ec\\Bootstrap::ENTRY_URL')}}cart.php">カートを確認する</a>
+        {% endif %}
+    </ul>
+    {# 検索フォーム #}
+    <form class="form-inline my-2 my-lg-0" name="seek" action="search.php" method="post">
+      <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="商品検索" aria-label="Search">
+      <input type="submit" name="search" value="検索">
+    </form>
+  </div>
+</nav>
+<div style="text-align: right">
+{% if userId != '' %}
+      <li class="nav-item">
+         <button class="navi-link" type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal1">
+  ログアウト
+</button>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div style="text-align: center" class="modal-body">
+        ログアウトしてよろしいですか？
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
+        <a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}logout.php"><button type="button" class="btn btn-primary" >ログアウト</button></a>
+        </div>
+        </div>
+      </div>
+     </div>
+     </div>
+  </div>
+        {% endif %}
+    <h1 style="text-align: center">宅配カレー.com</h1>
+    <p style="text-align: left" class="text-secondary">〜お店での味をそのまま味わっていただくために、そのままの状態で冷凍してお届けしています。冷凍して風味が変わらない商品のみを扱っておりますので、安心して「お店と同じ味」をお届けできると確信しております〜</p>
+      {% if userId != '' %}
+      <h4>こんにちは！{{userId}}さん</h4>
+      {% endif %}
+        <div id="wrapper">
+            {% include 'category_menu.html.twig' %}
+               <div id="item_list">
+                {% for value in dataArr %}
+        <div class="item">
+                      <ul>
+                          <li class="name"><a 
+href="{{constant('ec\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}" class="badge badge-warning">{{value.item_name}}</a></li>
+                     <li class="price">&yen;{{value.price|number_format(0, '.', ',')}} </li>
+                     <li class="ctg_id">{% if value.ctg_id == 1 %} <h6 class="text-muted">(1食分)</h6>{% endif %}</li>
+                    <li class="image"><a 
+href="{{constant('ec\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}"><img src="{{constant('ec\\Bootstrap::ENTRY_URL')}}images/{{value.image}}" 
+alt="{{value.item_name}}" width="193" height="130"></a></li>
+                    <li class="detail"><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}" class="badge badge-warning">詳細</a></li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+  </body>
+</html>
+              

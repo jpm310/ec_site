@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+<div id="category">
+    <ul>
+      <li>カテゴリー</li>
+        <li><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php" class="text-dark bg-warning">全ての商品</a></li>
+        
+        {% for value in cateArr %}
+            <li><a href="{{constant('ec\\Bootstrap::ENTRY_URL')}}list.php?ctg_id={{value.ctg_id}}" class="text-dark bg-warning">{{value.category_name}}</a></li>
+            {% endfor %}
+   </ul>
+</div>
+</html>
